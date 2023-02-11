@@ -252,6 +252,7 @@ class AutomaticAnimatedListView<T> extends AnimatedListView {
     AnimatedListBaseReorderModel? reorderModel,
     InitialScrollOffsetCallback? initialScrollOffsetCallback,
     void Function(int, int)? didFinishLayoutCallback,
+    final Widget Function(BuildContext, Widget)? reorderDecorationBuilder,
     bool holdScrollOffset = false,
     this.detectMoves = false,
     //
@@ -309,6 +310,7 @@ class AutomaticAnimatedListView<T> extends AnimatedListView {
             initialScrollOffsetCallback: initialScrollOffsetCallback,
             didFinishLayoutCallback: didFinishLayoutCallback,
             holdScrollOffset: holdScrollOffset,
+            reorderDecorationBuilder: reorderDecorationBuilder,
           ),
         );
 

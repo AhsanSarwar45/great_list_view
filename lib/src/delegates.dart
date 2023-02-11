@@ -185,6 +185,8 @@ class AnimatedSliverChildBuilderDelegate extends AnimatedSliverChildDelegate {
   /// Defaults to `null`.
   final void Function(int, int)? didFinishLayoutCallback;
 
+  Widget Function(BuildContext, Widget)? reorderDecorationBuilder;
+
   AnimatedSliverChildBuilderDelegate(
     this.builder,
     int initialChildCount, {
@@ -204,6 +206,7 @@ class AnimatedSliverChildBuilderDelegate extends AnimatedSliverChildDelegate {
     this.initialScrollOffsetCallback,
     this.didFinishLayoutCallback,
     this.holdScrollOffset = false,
+    this.reorderDecorationBuilder,
   })  : assert(initialChildCount >= 0),
         initialChildCount = initialChildCount;
 
@@ -221,11 +224,12 @@ class AnimatedSliverChildBuilderDelegate extends AnimatedSliverChildDelegate {
           comparator: morphComparator!,
           child: child);
     }
-    if (addAnimatedElevation != 0.0 && reorderModel != null) {
-      child = Material(
-        elevation: data.dragging ? addAnimatedElevation : 0.0,
-        child: child,
-      );
+    if (reorderModel != null) {
+      reorderDecorationBuilder ??= (context, child) => Material(
+            elevation: kDefaultAnimatedElevation,
+            child: child,
+          );
+      child = data.dragging ? reorderDecorationBuilder!(context, child) : child;
     }
     if (addFadeTransition) {
       child = FadeTransition(opacity: data.animation, child: child);
