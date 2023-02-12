@@ -93,15 +93,6 @@ class AnimatedSliverChildBuilderDelegate extends AnimatedSliverChildDelegate {
   /// Defaults to `true`.
   final bool addLongPressReorderable;
 
-  /// Whether to wrap each child in a [Material], if a reorder model has been provided.
-  ///
-  /// An elevation effect is automatically applied to the item picked up for reordering.
-  /// If the value is `0.0` the child is not wrapped at all.
-  /// See [Material.elevation] for details.
-  ///
-  /// Defaults to [kDefaultAnimatedElevation].
-  final double addAnimatedElevation;
-
   /// Whether to wrap each child in a [FadeTransition].
   ///
   /// A fade effect is automatically applied to dismissing and incoming items.
@@ -197,7 +188,6 @@ class AnimatedSliverChildBuilderDelegate extends AnimatedSliverChildDelegate {
     // this.semanticIndexOffset = 0,
     this.animator = const DefaultAnimatedListAnimator(),
     this.addLongPressReorderable = true,
-    this.addAnimatedElevation = kDefaultAnimatedElevation,
     this.addFadeTransition = true,
     this.morphResizeWidgets = true,
     this.morphDuration = kDefaultMorphTransitionDuration,
