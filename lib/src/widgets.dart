@@ -273,6 +273,7 @@ class AutomaticAnimatedListView<T> extends AnimatedListView {
         ScrollViewKeyboardDismissBehavior.manual,
     String? restorationId,
     Clip clipBehavior = Clip.hardEdge,
+    Widget? footer,
   }) : super.custom(
           key: key,
           scrollDirection: scrollDirection,
@@ -292,9 +293,11 @@ class AutomaticAnimatedListView<T> extends AnimatedListView {
           listController: listController,
           delegate: AnimatedSliverChildBuilderDelegate(
             (context, index, data) {
-              return itemBuilder(context, list[index], data);
+              return index == list.length
+                  ? footer ?? Container()
+                  : itemBuilder(context, list[index], data);
             },
-            list.length,
+            list.length + (footer != null ? 1 : 0),
             addAutomaticKeepAlives: addAutomaticKeepAlives,
             addRepaintBoundaries: addRepaintBoundaries,
             //  addSemanticIndexes: addSemanticIndexes,
