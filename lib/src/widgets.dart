@@ -293,7 +293,8 @@ class AutomaticAnimatedListView<T> extends AnimatedListView {
           listController: listController,
           delegate: AnimatedSliverChildBuilderDelegate(
             (context, index, data) {
-              return index == list.length
+              int lastIndex = reverse ? 0 : list.length;
+              return index == lastIndex
                   ? footer ?? Container()
                   : itemBuilder(context, list[index], data);
             },
